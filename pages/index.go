@@ -1,34 +1,45 @@
 package pages
 
 import (
+	"fmt"
 	"html/template"
-	"log"
 	"net/http"
+	"time"
 )
 
-type PageData struct {
+type ConstantPageData struct {
 	Title   string
-	Message string
+	Year   	string
 }
 
-type Handler struct {
-	Tmpl *template.Template
-}
+var year string = fmt.Sprint(time.Now().Year())
 
-func NewHandler(tmpl *template.Template) *Handler {
-	return &Handler{Tmpl: tmpl}
-}
-
-// Index serves the main index page.
-func (h *Handler) Index(w http.ResponseWriter, r *http.Request) {
-	data := PageData{
-		Title:   "Boilerplate",
-		Message: "Welcome to Boilerplate! Its a highly customizable email client.",
+func render(w http.ResponseWriter, tmpl string) {
+	data := ConstantPageData{
+		Title: "Boilerplate",
+		Year:  year,
 	}
+    // Parse templates
+    templates, err := template.ParseFiles(
+        "templates/layouts/base.html",
+        //"templates/partials/_navbar.html",
+		fmt.Sprintf("templates/pages/%s.html", tmpl),
+    )
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    // Execute the base layout (which includes nested templates)
+    err = templates.ExecuteTemplate(w, "base", data)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+    }
+}
 
-	err := h.Tmpl.ExecuteTemplate(w, "pages/index.html", data)
-	if err != nil {
-		log.Printf("Error executing index template: %v", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-	}
+func Index(w http.ResponseWriter, r *http.Request) {
+    render(w, "index")
+}
+
+func Mails(w http.ResponseWriter, r *http.Request) {
+	render(w, "mails")
 }

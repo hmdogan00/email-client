@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Title}}</title>
-    <script src="/static/htmx.min.js"></script>
-    <link rel="stylesheet" href="/static/css/main.css"></link>
-</head>
-<body>
-    <div class="container">
-        <h1>{{.Title}}</h1>
-        <p>{{.Message}}</p>
+{{define "content"}}
+<button hx-get="/get-time" hx-target="#time-display" hx-swap="innerHTML">
+    Get Current Time
+</button>
 
-        <button hx-get="/get-time" hx-target="#time-display" hx-swap="innerHTML">
-            Get Current Time
-        </button>
-
-        <div id="time-display" hx-get="/get-time" hx-trigger="load" hx-swap="innerHTML">
-            Click the button to see the time.
-        </div>
-
-        <a href="/mails" hx-push-url="/mails">
-            View Mails
-        </a>
-    </div>
-</body>
-</html>
+<div id="time-display" hx-get="/get-time" hx-trigger="load" hx-swap="innerHTML">
+    Click the button to see the time.
+</div>
+{{end}}
