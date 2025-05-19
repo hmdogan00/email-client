@@ -1,0 +1,13 @@
+{
+  "name": "email-client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.89.0"
+  },
+  "scripts": {
+    "scss:build": "sass static/scss:static/css --style=compressed",
+    "scss:watch": "sass static/scss:static/css --watch"
+  }
+}
