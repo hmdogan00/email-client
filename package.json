@@ -4,9 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "sass": "^1.89.0"
   },
   "scripts": {
+    "dev": "concurrently -k -n SASS,GO -c yellow,cyan \"yarn run scss:watch\" \"fresh\"",
     "scss:build": "sass static/scss:static/css --style=compressed",
     "scss:watch": "sass static/scss:static/css --watch"
   }
