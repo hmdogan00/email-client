@@ -7,21 +7,21 @@ import (
 	"time"
 )
 
-type PageData struct {
+type timePartialData struct {
 	Time    string
 }
 
-type Handler struct {
+type handler struct {
 	Tmpl *template.Template
 }
 
-func NewHandler(tmpl *template.Template) *Handler {
+func TimeHandler(tmpl *template.Template) *Handler {
 	return &Handler{Tmpl: tmpl}
 }
 
 func (h *Handler) GetTime(w http.ResponseWriter, r *http.Request) {
 	currentTime := time.Now().Format("15:04:05 MST")
-	data := PageData{
+	data := timePartialData{
 		Time: currentTime,
 	}
 

@@ -8,7 +8,7 @@
     "sass": "^1.89.0"
   },
   "scripts": {
-    "dev": "concurrently -k -n SASS,GO -c yellow,cyan \"yarn run scss:watch\" \"fresh -c fresh.conf\"",
+    "dev": "concurrently -k -n SASS,GO -c yellow,cyan \"yarn run scss:watch\" \"./run_backend.sh\"",
     "scss:build": "sass static/scss:static/css --style=compressed",
     "scss:watch": "sass static/scss:static/css --watch"
   }

@@ -10,6 +10,7 @@ import (
 type ConstantPageData struct {
 	Title   string
 	Year   	string
+    Path    string
 }
 
 var year string = fmt.Sprint(time.Now().Year())
@@ -18,6 +19,7 @@ func render(w http.ResponseWriter, tmpl string) {
 	data := ConstantPageData{
 		Title: "Boilerplate",
 		Year:  year,
+        Path: tmpl,
 	}
     // Parse templates
     templates, err := template.ParseFiles(

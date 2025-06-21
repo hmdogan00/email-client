@@ -1,5 +1,28 @@
 {{define "content"}}
-<div>
-    Mails
+<div id="main">
+    <h1>Mails</h1>
+    <div id="controls">
+        <button hx-get="/mails/get" hx-target="#main" hx-swap="innerHTML">
+            Fetch Mails
+        </button>
+        <button hx-get="/mails/compose" hx-target="#main" hx-swap="innerHTML">
+            Compose Mail
+        </button>
+    </div>
+    <div id="mails-list">
+        {{if .Mails}}
+            <ul>
+                {{range .Mails}}
+                    <li>
+                        <strong>{{.Subject}}</strong> - {{.Sender}} - {{.Date}}
+                        <button hx-get="/mails/view/{{.ID}}" hx-target="#main" hx-swap="innerHTML">
+                            View
+                        </button>
+                    </li>
+                {{end}}
+            </ul>
+        {{else}}
+            <p>No mails available.</p>
+        {{end}}
 </div>
 {{end}}

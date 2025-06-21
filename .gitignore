@@ -2,3 +2,4 @@ tmp
 .env
 node_modules
 static/css
+.vscode

@@ -1,0 +1,6 @@
+@import './main.scss';
+
+#main {
+    height: calc(100vh - 104px);
+    background: $background-color;
+}
